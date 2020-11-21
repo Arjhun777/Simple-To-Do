@@ -1,0 +1,16 @@
+.card-action-wrapper {
+    font-family: sans-serif;
+    width: 198px;
+    .card-action {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+        cursor: pointer;
+        > svg {
+            color: gray;
+        }
+        .action-text {
+            padding-left: 10px;
+        }
+    }
+}
