@@ -1,0 +1,43 @@
+@import './variables';
+
+.status-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 450px;
+    width: 426px;
+    height: 100vh;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 0 2px 0px grey;
+    .status-title {
+        width: auto;
+        text-align: center;
+        padding: 10px;
+        height: 24px;
+        border-radius: 8px 8px 0 0;
+        margin: 0;
+    }
+    .status-card-wrapper {
+        height: 100%;
+        padding: 22px 12px;
+        background-color: $statusBackground;
+        overflow-x: auto;
+    }
+    &.todo {
+        .status-title {
+            background-color: $todoPrimary;
+        }
+    }
+    &.in-progress {
+        .status-title {
+            background-color: $inProgressPrimary;
+            color: white;
+        }
+    }
+    &.done {
+        .status-title {
+            background-color: $donePrimary;
+            color: white;
+        }
+    }
+}
