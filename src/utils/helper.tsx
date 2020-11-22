@@ -124,3 +124,12 @@ export const subTaskStatusChange = (taskId: number, subTaskID: number, checked: 
     task[index].subTask[subTaskIndex].done = checked;
     setTask(task);
 }
+
+export const getChartSeries = (task:any=null) => {
+    const allTask = task ? task : getTaskByStatus();
+    const series:Array<number> = [];
+    Object.values(allTask).map((value:any) => {
+        series.push(value.length);
+    });
+    return series;
+}

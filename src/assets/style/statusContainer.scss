@@ -4,11 +4,12 @@
     display: flex;
     flex-direction: column;
     min-width: 300px;
-    max-width: 450px;
-    width: 426px;
+    max-width: 500px;
+    width: 388px;
     height: 100vh;
     border-radius: 8px 8px 0 0;
     box-shadow: 0 0 2px 0px grey;
+    margin: 0 16px 16px 16px;
     .status-title {
         width: auto;
         text-align: center;
@@ -22,6 +23,9 @@
         padding: 22px 12px;
         background-color: $statusBackground;
         overflow-x: auto;
+        .no-result-text {
+            color: gray;
+        }
     }
     &.todo {
         .status-title {
@@ -39,5 +43,11 @@
             background-color: $donePrimary;
             color: white;
         }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .status-container {
+        margin: 0;
     }
 }

@@ -1,9 +1,13 @@
 .task-container {
+    width: 100%;
     font-family: sans-serif;
     .task-headbar {
         display: flex;
         align-items: center;
         padding: 24px;
+        .task-back-btn {
+            cursor: pointer;
+        }
         .task-head-text {
             padding-left: 16px;
             font-size: 24px;
@@ -14,7 +18,7 @@
     }
     .flex-task-container {
         display: flex;
-        justify-content: space-evenly;
+        // justify-content: space-evenly;
         flex-wrap: wrap;
         padding: 30px 40px;
         .task-input-wrapper {

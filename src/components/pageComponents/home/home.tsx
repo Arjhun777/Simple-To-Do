@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "@material-ui/core";
-import { deleteTask, getTask, getTaskByStatus, subTaskStatusChange } from "../../../utils/helper";
+import { deleteTask, getTaskByStatus, subTaskStatusChange } from "../../../utils/helper";
 import history from "../../../utils/history";
 import StatusContainer from "../../resuableComponents/statusContainer/statusContainer";
+import PieChart from "../../resuableComponents/chart/pieChart";
 
 const STATUS:Array<Status> = [
     { name: 'todo', title: 'To-Do', class: 'todo' },
@@ -33,18 +34,23 @@ function Home(props:HomeProps) {
     
     return (
         <React.Fragment>
-            <div className="main-container">
-                <div className="new-task-btn">
-                    <Button onClick={onNewTask}>New Task</Button>
+            <div className="main-container flex-wrapper">
+                <div className="chart-container">
+                    <PieChart task={todoCards}/>
                 </div>
-                <div className="status-wrapper">
-                    {
-                        STATUS.map((status) => (
-                            <>
-                                <StatusContainer {...status} cardDetails={todoCards[status.name]} deleteTask={deleteTaskFromList} changeSubTask={changeSubTask}/>
-                            </>
-                        ))
-                    }
+                <div>
+                    <div className="new-task-btn">
+                        <Button onClick={onNewTask}>New Task</Button>
+                    </div>
+                    <div className="status-wrapper">
+                        {
+                            STATUS.map((status) => (
+                                <>
+                                    <StatusContainer {...status} cardDetails={todoCards[status.name]} deleteTask={deleteTaskFromList} changeSubTask={changeSubTask}/>
+                                </>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </React.Fragment>

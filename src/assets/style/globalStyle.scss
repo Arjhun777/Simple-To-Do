@@ -5,8 +5,8 @@
     align-items: center;
     justify-content: center;
 }
-
 .main-container {
+    width: 100%;
     .new-task-btn {
         margin: 20px;
         text-align: center;
@@ -18,7 +18,38 @@
     .status-wrapper {
         font-family: sans-serif;
         display: flex;
-        justify-content: space-around;
+        // justify-content: space-around;
         flex-wrap: wrap;
+    }
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    @media screen and (max-width: 600px) {
+        flex-wrap: wrap;
+        .chart-container {
+            width: 100%;
+            .pie-chart-container {
+                margin: auto;   
+            }
+        }
+    }
+}
+
+.pie-chart-container {
+    @include flex-container();
+    border-right: 1px solid #17a14e;
+    height: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    .pie-chart-head {
+        font-family: sans-serif;
+    }
+}
+@media screen and (max-width: 600px) {
+    .pie-chart-container {
+        border-right: none;
     }
 }

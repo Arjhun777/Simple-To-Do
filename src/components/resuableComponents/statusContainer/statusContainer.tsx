@@ -16,7 +16,7 @@ function StatusContainer(props:StatusContainerProps) {
                         ?   props.cardDetails.map((cardDetail:CardDetail) => (
                                 <TodoCard {...cardDetail} currentTask={props.name} deleteTask={props.deleteTask} changeSubTask={props.changeSubTask}/>
                             ))
-                        :   `No ${props.title} Task Yet`
+                        :   <div className="no-result-text">{`No ${props.title} Task Yet`}</div>
                     }
                 </div>
             </div>

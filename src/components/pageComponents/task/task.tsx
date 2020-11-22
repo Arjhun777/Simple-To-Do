@@ -10,6 +10,7 @@ import AddIcon from '@material-ui/icons/Add';
 // Style Imports
 import '../../../assets/style/task.scss';
 import history from '../../../utils/history';
+import PieChart from '../../resuableComponents/chart/pieChart';
 
 const STATUS_CONV:any = {
     'To-Do': 'todo',
@@ -122,77 +123,82 @@ function Task() {
 
     return (
         <React.Fragment>
-            <div className="task-container">
-                <div className="task-headbar">
-                    <span onClick={handleBack}>
-                        <ArrowBackIcon></ArrowBackIcon>
-                    </span>
-                    <span className="task-head-text">{isEdit ? 'Edit Task' : 'Create Task'}</span>
+            <div className="flex-wrapper">
+                <div className="chart-container">
+                    <PieChart />
                 </div>
-                <Divider></Divider>
-                <div className="flex-task-container">
-                    <div className="task-input-wrapper">
-                        <div className="task-name-wrapper task-wrapper">
-                            <label htmlFor="task" className="task-name-label task-label">Enter Task Name</label>
-                            <input className="task-name-text" placeholder="Task Name" type="text" name="task" onChange={handleTaskChange} value={taskDetails.task}></input>
-                        </div>
-                        <div className="task-description-wrapper task-wrapper">
-                            <label htmlFor="description" className="task-description-label task-label">Enter Task Name</label>
-                            <textarea className="task-description-text" placeholder="Description" name="description" onChange={handleTaskChange} value={taskDetails.description}></textarea>
-                        </div>
-                        <div className="task-branch task-wrapper">
-                            <label htmlFor="status" className="task-branch-label task-label">Branch to</label>
-                            <div className="task-status-wrapper">
-                                <input className={`task-todo ${taskDetails.status === 'todo' ? 'active' : ''}`} type="button" name="status" value="To-Do" onClick={handleStatusChange}/>
-                                <input className={`task-in-progress ${taskDetails.status === 'inProgress' ? 'active' : ''}`} type="button" name="status" value="In-Progress" onClick={handleStatusChange}/>
-                                <input className={`task-done ${taskDetails.status === 'done' ? 'active' : ''}`} type="button" name="status" value="Done" onClick={handleStatusChange}/>
-                            </div>
-                        </div>
-                        <div className="task-tag-wrapper task-wrapper">
-                            <label htmlFor="task-tag" className="task-label">Select Tag</label>
-                            <div className="task-tag-input-wrapper">
-                                <Tag onChange={handleTagChange} checked={taskDetails.tag === 'personal'} label={'Personal'} name="personal" />
-                                <Tag onChange={handleTagChange} checked={taskDetails.tag === 'official'} label={'Official'} name="official" />
-                                <Tag onChange={handleTagChange} checked={taskDetails.tag === 'miscellaneous'} label={'Miscellaneous'} name="miscellaneous" />
-                            </div>
-                        </div>
-                        <div className="task-date-select-wrapper task-wrapper">
-                            <label htmlFor="date" className="task-label">Select Date</label>
-                            <input className="task-date-select" name="date" type="date" min={getMinDate()} onChange={handleTaskChange} value={taskDetails.date}/>
-                        </div>
-                        <div className="action-wrapper">
-                            <Button className="cancel-btn" onClick={handleBack}>Cancel</Button>
-                            <Button className="create-btn" onClick={handleSubmit}>{isEdit ? 'Edit' : 'Create'}</Button>
-                        </div>
+                <div className="task-container">
+                    <div className="task-headbar">
+                        <span className="task-back-btn" onClick={handleBack}>
+                            <ArrowBackIcon></ArrowBackIcon>
+                        </span>
+                        <span className="task-head-text">{isEdit ? 'Edit Task' : 'Create Task'}</span>
                     </div>
-                    <div className="sub-task-container task-wrapper">
-                        <label htmlFor="sub-task" className="task-label">Sub-Tasks</label>
-                        {
-                            taskDetails.subTask?.map((subtask, index) => (        
-                                <div>
-                                    <div className="sub-task-wrapper">
-                                        <Checkbox
-                                            icon={<CheckBoxOutlineBlankIcon fontSize="small" color="inherit" />}
-                                            checkedIcon={<CheckBoxIcon fontSize="small" color="inherit" />}
-                                            checked={subtask.done}
-                                            onChange={(e) => onSubTaskStatusChange(e, index)}
-                                            name='done'
-                                            color="primary"
-                                        />
-                                        <input className="sub-task-name-text" placeholder="Sub Task" type="text" name="task" value={subtask.task} onChange={(e) => onSubTaskStatusChange(e, index)}/>
-                                        <span className="delete-subtask" onClick={(e) => deleteSubTask(e, index)}>
-                                            <DeleteOutlineIcon></DeleteOutlineIcon>
-                                        </span>
-                                    </div>
-                                    <Divider></Divider>
+                    <Divider></Divider>
+                    <div className="flex-task-container">
+                        <div className="task-input-wrapper">
+                            <div className="task-name-wrapper task-wrapper">
+                                <label htmlFor="task" className="task-name-label task-label">Enter Task Name</label>
+                                <input className="task-name-text" placeholder="Task Name" type="text" name="task" onChange={handleTaskChange} value={taskDetails.task}></input>
+                            </div>
+                            <div className="task-description-wrapper task-wrapper">
+                                <label htmlFor="description" className="task-description-label task-label">Enter Task Name</label>
+                                <textarea className="task-description-text" placeholder="Description" name="description" onChange={handleTaskChange} value={taskDetails.description}></textarea>
+                            </div>
+                            <div className="task-branch task-wrapper">
+                                <label htmlFor="status" className="task-branch-label task-label">Branch to</label>
+                                <div className="task-status-wrapper">
+                                    <input className={`task-todo ${taskDetails.status === 'todo' ? 'active' : ''}`} type="button" name="status" value="To-Do" onClick={handleStatusChange}/>
+                                    <input className={`task-in-progress ${taskDetails.status === 'inProgress' ? 'active' : ''}`} type="button" name="status" value="In-Progress" onClick={handleStatusChange}/>
+                                    <input className={`task-done ${taskDetails.status === 'done' ? 'active' : ''}`} type="button" name="status" value="Done" onClick={handleStatusChange}/>
                                 </div>
-                            ))
-                        }
-                        <div className="new-sub-task-wrapper" onClick={insertNewSubTask}>
-                            <span>
-                                <AddIcon></AddIcon>
-                            </span>
-                            <span className="new-sub-task-text">New Sub Task</span>
+                            </div>
+                            <div className="task-tag-wrapper task-wrapper">
+                                <label htmlFor="task-tag" className="task-label">Select Tag</label>
+                                <div className="task-tag-input-wrapper">
+                                    <Tag onChange={handleTagChange} checked={taskDetails.tag === 'personal'} label={'Personal'} name="personal" />
+                                    <Tag onChange={handleTagChange} checked={taskDetails.tag === 'official'} label={'Official'} name="official" />
+                                    <Tag onChange={handleTagChange} checked={taskDetails.tag === 'miscellaneous'} label={'Miscellaneous'} name="miscellaneous" />
+                                </div>
+                            </div>
+                            <div className="task-date-select-wrapper task-wrapper">
+                                <label htmlFor="date" className="task-label">Select Date</label>
+                                <input className="task-date-select" name="date" type="date" min={getMinDate()} onChange={handleTaskChange} value={taskDetails.date}/>
+                            </div>
+                            <div className="action-wrapper">
+                                <Button className="cancel-btn" onClick={handleBack}>Cancel</Button>
+                                <Button className="create-btn" onClick={handleSubmit}>{isEdit ? 'Edit' : 'Create'}</Button>
+                            </div>
+                        </div>
+                        <div className="sub-task-container task-wrapper">
+                            <label htmlFor="sub-task" className="task-label">Sub-Tasks</label>
+                            {
+                                taskDetails.subTask?.map((subtask, index) => (        
+                                    <div>
+                                        <div className="sub-task-wrapper">
+                                            <Checkbox
+                                                icon={<CheckBoxOutlineBlankIcon fontSize="small" color="inherit" />}
+                                                checkedIcon={<CheckBoxIcon fontSize="small" color="inherit" />}
+                                                checked={subtask.done}
+                                                onChange={(e) => onSubTaskStatusChange(e, index)}
+                                                name='done'
+                                                color="primary"
+                                            />
+                                            <input className="sub-task-name-text" placeholder="Sub Task" type="text" name="task" value={subtask.task} onChange={(e) => onSubTaskStatusChange(e, index)}/>
+                                            <span className="delete-subtask" onClick={(e) => deleteSubTask(e, index)}>
+                                                <DeleteOutlineIcon></DeleteOutlineIcon>
+                                            </span>
+                                        </div>
+                                        <Divider></Divider>
+                                    </div>
+                                ))
+                            }
+                            <div className="new-sub-task-wrapper" onClick={insertNewSubTask}>
+                                <span>
+                                    <AddIcon></AddIcon>
+                                </span>
+                                <span className="new-sub-task-text">New Sub Task</span>
+                            </div>
                         </div>
                     </div>
                 </div>

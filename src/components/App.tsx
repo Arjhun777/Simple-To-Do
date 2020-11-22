@@ -7,7 +7,7 @@ const App = () => {
     return (
         <BrowserRouter>
             <ErrorBoundary history={history}>
-                <AppRouter />    
+                <AppRouter />
             </ErrorBoundary>
         </BrowserRouter>
     )
