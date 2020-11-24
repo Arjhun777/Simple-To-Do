@@ -5,6 +5,11 @@
     align-items: center;
     justify-content: center;
 }
+.module-loader {
+    position: absolute;
+    top: 50vh;
+    left: 50%;
+}
 .main-container {
     width: 100%;
     .new-task-btn {
