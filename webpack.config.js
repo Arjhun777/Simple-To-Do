@@ -12,6 +12,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isInteractive = process.stdout.isTTY;
 const appPath = path.resolve(__dirname, './');
+const appPublic = path.resolve(__dirname, 'public');
 const appBuild = path.resolve(__dirname, 'build');
 const appHtml = path.resolve(__dirname, 'src/index.html');
 const appHtmlts = path.resolve(__dirname, 'src/index');
