@@ -32,9 +32,9 @@ module.exports = (env) =>  {
         ...globalConfig
     }
     !isProduction ? envConfig = {...envConfig, ...localConfig} : null;
-    isProduction && checkBrowsers(appPath, isInteractive).then(() => {
-        copyPublicFolder();
-    })
+    // isProduction && checkBrowsers(appPath, isInteractive).then(() => {
+    //     copyPublicFolder();
+    // })
     console.log('=========================', env.NODE_ENV, 'env_var', envConfig)
     return {
         mode: env.NODE_ENV,
@@ -44,7 +44,6 @@ module.exports = (env) =>  {
             filename: 'bundle.js',
             publicPath: '/'
         },
-        devtool: 'source-map',
         module: {
             rules: [
                 {
@@ -91,7 +90,6 @@ module.exports = (env) =>  {
             minimize: isProduction,
             minimizer: [
                 new TerserPlugin({
-                    // test: /\.tsx(\?.*)?$/i
                     terserOptions: {
                         parse: {
                           ecma: 8,
@@ -131,10 +129,7 @@ module.exports = (env) =>  {
             new HtmlWebPackPlugin({
                 template: appHtml
             }),
-            new MiniCssExtractPlugin({ // plugin for controlling how compiled css will be outputted and named
-                filename: "css/[name].css",
-                chunkFilename: "css/[id].css"
-            }),
+            new MiniCssExtractPlugin(),
             new webpack.DefinePlugin({
                 env_config: JSON.stringify(envConfig)
             })
